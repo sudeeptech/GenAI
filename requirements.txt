@@ -4,3 +4,4 @@ langchain
 langchain-text-splitters
 faiss-cpu
 numpy
+langchain[all]>=0.1.0
