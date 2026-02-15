@@ -16,9 +16,9 @@ st.set_page_config(page_title="RAG Chatbot", page_icon="🤖", layout="wide")
 st.title("🤖 RAG Chatbot with OpenAI & LangChain")
 
 # -------------------------------
-# OPENAI API KEY FROM SECRETS
+# OPENAI API KEY
 # -------------------------------
-OPENAI_KEY = st.secrets["openai"]["api_key"]
+OPENAI_KEY = "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"
 
 # -------------------------------
 # DOCUMENT UPLOAD
@@ -27,7 +27,6 @@ uploaded_file = st.file_uploader("Upload a text document (.txt)", type=["txt"])
 
 if uploaded_file is not None:
     text = uploaded_file.read().decode("utf-8")
-
     st.success("📄 Document Loaded Successfully!")
 
     # -------------------------------
