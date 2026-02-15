@@ -1,0 +1,3 @@
+Artificial Intelligence (AI) is the simulation of human intelligence processes by machines, especially computer systems.
+Applications of AI include natural language processing, machine learning, and robotics.
+OpenAI develops advanced AI models such as GPT series for text generation.
