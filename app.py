@@ -1,56 +1,60 @@
-# ==========================
-# Streamlit RAG Chatbot App
-# ==========================
+# ===============================================================
+# STREAMLIT RAG CHATBOT USING LANGCHAIN + OPENAI
+# ===============================================================
 
 import streamlit as st
-from langchain.text_splitters import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 
 # -------------------------------
-# Page Config
+# STREAMLIT PAGE CONFIG
 # -------------------------------
-st.set_page_config(page_title="RAG Chatbot", layout="wide")
-st.title("📚 RAG Chatbot with OpenAI Embeddings")
+st.set_page_config(page_title="RAG Chatbot", page_icon="🤖", layout="wide")
+st.title("🤖 RAG Chatbot with OpenAI & LangChain")
 
 # -------------------------------
-# OpenAI API Key from Streamlit Secrets
+# OPENAI API KEY FROM SECRETS
 # -------------------------------
 OPENAI_KEY = st.secrets["openai"]["api_key"]
 
 # -------------------------------
-# Upload Document
+# DOCUMENT UPLOAD
 # -------------------------------
-uploaded_file = st.file_uploader("Upload your text document", type=["txt"])
+uploaded_file = st.file_uploader("Upload a text document (.txt)", type=["txt"])
 
 if uploaded_file is not None:
     text = uploaded_file.read().decode("utf-8")
 
-    st.success("✅ Document Loaded")
+    st.success("📄 Document Loaded Successfully!")
 
     # -------------------------------
-    # Split Text into Chunks
+    # SPLIT TEXT INTO CHUNKS
     # -------------------------------
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=50)
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200,
+        chunk_overlap=50
+    )
     chunks = text_splitter.split_text(text)
-    st.info(f"Document split into {len(chunks)} chunks")
+    st.info(f"📌 Document split into {len(chunks)} chunks.")
 
     # -------------------------------
-    # Create Embeddings
+    # CREATE EMBEDDINGS AND VECTOR DB
     # -------------------------------
     embeddings = OpenAIEmbeddings(api_key=OPENAI_KEY)
     vector_db = FAISS.from_texts(chunks, embeddings)
     st.success("✅ Vector Database Created")
 
     # -------------------------------
-    # LLM Model
+    # CREATE LLM
     # -------------------------------
     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7, api_key=OPENAI_KEY)
+    st.success("✅ LLM Ready")
 
     # -------------------------------
-    # Prompt Template
+    # PROMPT TEMPLATE
     # -------------------------------
     prompt_template = PromptTemplate(
         input_variables=["context", "question"],
@@ -67,20 +71,22 @@ Question:
     )
 
     # -------------------------------
-    # User Question Input
+    # USER QUESTION INPUT
     # -------------------------------
-    user_question = st.text_input("Ask a question about the document:")
+    user_question = st.text_input("Ask a question about your document:")
 
     if user_question:
-        # Retrieve similar chunks
+        # Retrieve relevant document chunks
         docs = vector_db.similarity_search(user_question, k=3)
         context = "\n".join([doc.page_content for doc in docs])
-        prompt = prompt_template.format(context=context, question=user_question)
 
-        # Get response from LLM
+        # Create final prompt
+        prompt = prompt_template.format(
+            context=context,
+            question=user_question
+        )
+
+        # Generate answer
         response = llm(prompt)
-        st.markdown("### 🤖 Answer")
+        st.subheader("Answer:")
         st.write(response.content)
-
-else:
-    st.info("Please upload a text file to get started.")
