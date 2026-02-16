@@ -19,7 +19,7 @@ st.title("🤖 RAG Chatbot with OpenAI & LangChain")
 # -------------------------------
 # OPENAI API KEY (HARDCODED)
 # -------------------------------
-OPENAI_KEY = "YOUR_OPENAI_API_KEY_HERE"
+OPENAI_KEY = "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"
 
 # -------------------------------
 # DOCUMENT UPLOAD
