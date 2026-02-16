@@ -4,11 +4,11 @@
 
 import streamlit as st
 from langchain.text_splitter import CharacterTextSplitter
-
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
+from langchain.schema import HumanMessage
 
 # -------------------------------
 # STREAMLIT PAGE CONFIG
@@ -33,11 +33,9 @@ if uploaded_file is not None:
     # -------------------------------
     # SPLIT TEXT INTO CHUNKS
     # -------------------------------
-   text_splitter = CharacterTextSplitter(
-    chunk_size=200,
-    chunk_overlap=50
-   )
-
+    text_splitter = CharacterTextSplitter(
+        chunk_size=200,
+        chunk_overlap=50
     )
     chunks = text_splitter.split_text(text)
     st.info(f"📌 Document split into {len(chunks)} chunks.")
@@ -92,7 +90,7 @@ Question:
             question=user_question
         )
 
-        # Generate answer
-        response = llm(prompt)
+        # Generate answer using ChatOpenAI
+        response = llm([HumanMessage(content=prompt)])
         st.subheader("Answer:")
-        st.write(response.content)
+        st.write(response[0].content)
