@@ -16,7 +16,7 @@ st.set_page_config(page_title="RAG Chatbot", page_icon="🤖", layout="wide")
 st.title("🤖 RAG Chatbot with OpenAI & LangChain")
 
 # -------------------------------
-# OPENAI API KEY
+# OPENAI API KEY (HARD-CODED)
 # -------------------------------
 OPENAI_KEY = "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"
 
@@ -42,14 +42,18 @@ if uploaded_file is not None:
     # -------------------------------
     # CREATE EMBEDDINGS AND VECTOR DB
     # -------------------------------
-    embeddings = OpenAIEmbeddings(api_key=OPENAI_KEY)
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
     vector_db = FAISS.from_texts(chunks, embeddings)
     st.success("✅ Vector Database Created")
 
     # -------------------------------
     # CREATE LLM
     # -------------------------------
-    llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7, api_key=OPENAI_KEY)
+    llm = ChatOpenAI(
+        model_name="gpt-3.5-turbo",
+        temperature=0.7,
+        openai_api_key=OPENAI_KEY
+    )
     st.success("✅ LLM Ready")
 
     # -------------------------------
