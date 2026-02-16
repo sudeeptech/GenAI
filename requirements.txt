@@ -1,9 +1,9 @@
 streamlit==1.30.0
 openai==0.27.0
-faiss-cpu==1.7.3
-langchain==0.1.304
-tiktoken==0.4.0
-markdown-it-py==4.0.0
-mdurl==0.1.2
-pygments==2.19.2
-rich==14.3.2
+faiss-cpu   # Let it pick latest compatible version
+langchain   # Latest LangChain will work with RecursiveCharacterTextSplitter
+tiktoken
+markdown-it-py
+mdurl
+pygments
+rich
