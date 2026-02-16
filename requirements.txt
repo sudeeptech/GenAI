@@ -1,6 +1,4 @@
-streamlit
-openai
-langchain>=0.1.0
-tiktoken
-numpy
-faiss-cpu
+streamlit==1.27.0
+langchain>=1.0.0
+faiss-cpu>=1.7.4
+openai>=1.0.0
