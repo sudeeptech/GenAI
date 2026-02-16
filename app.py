@@ -41,7 +41,7 @@ if uploaded_file is not None:
     st.info(f"📌 Document split into {len(chunks)} chunks.")
 
     # -------------------------------
-    # CREATE EMBEDDINGS AND VECTOR DB (CHROMA)
+    # CREATE EMBEDDINGS AND VECTOR DB (USING CHROMA)
     # -------------------------------
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
     vector_db = Chroma.from_texts(chunks, embeddings)
