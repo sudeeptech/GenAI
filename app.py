@@ -3,11 +3,14 @@
 # ===============================================================
 
 import streamlit as st
-from langchain.text_splitters import RecursiveCharacterTextSplitter
+
+# LangChain imports (updated for latest version)
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
+
 
 # -------------------------------
 # STREAMLIT PAGE CONFIG
