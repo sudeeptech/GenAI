@@ -1,9 +1,9 @@
 streamlit==1.30.0
 openai==0.27.0
-langchain>=0.1.232
+langchain==0.1.232
 tiktoken
 chromadb
-markdown-it-py
-mdurl
-pygments
-rich
+markdown-it-py==4.0.0
+mdurl==0.1.2
+pygments==2.19.2
+rich==14.3.2
