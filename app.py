@@ -3,7 +3,8 @@
 # ===============================================================
 
 import streamlit as st
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import CharacterTextSplitter
+
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
@@ -32,9 +33,11 @@ if uploaded_file is not None:
     # -------------------------------
     # SPLIT TEXT INTO CHUNKS
     # -------------------------------
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=200,
-        chunk_overlap=50
+   text_splitter = CharacterTextSplitter(
+    chunk_size=200,
+    chunk_overlap=50
+   )
+
     )
     chunks = text_splitter.split_text(text)
     st.info(f"📌 Document split into {len(chunks)} chunks.")
