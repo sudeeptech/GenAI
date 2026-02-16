@@ -3,14 +3,11 @@
 # ===============================================================
 
 import streamlit as st
-
-# LangChain imports (updated for latest version)
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
-
 
 # -------------------------------
 # STREAMLIT PAGE CONFIG
@@ -19,7 +16,7 @@ st.set_page_config(page_title="RAG Chatbot", page_icon="🤖", layout="wide")
 st.title("🤖 RAG Chatbot with OpenAI & LangChain")
 
 # -------------------------------
-# OPENAI API KEY (HARD-CODED)
+# OPENAI API KEY (HARDCODED)
 # -------------------------------
 OPENAI_KEY = "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"
 
