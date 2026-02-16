@@ -1,7 +1,5 @@
 streamlit
 openai
-langchain
-langchain-text-splitters
+langchain[all]>=0.1.0
 faiss-cpu
 numpy
-langchain[all]>=0.1.0
