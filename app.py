@@ -33,10 +33,9 @@ if uploaded_file is not None:
     # -------------------------------
     # SPLIT TEXT INTO CHUNKS
     # -------------------------------
-  text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=200,
-    chunk_overlap=50)
-
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=200,
+        chunk_overlap=50
     )
     chunks = text_splitter.split_text(text)
     st.info(f"📌 Document split into {len(chunks)} chunks.")
