@@ -1,11 +1,11 @@
 # ===============================================================
-# STREAMLIT RAG CHATBOT USING LANGCHAIN + OPENAI
+# STREAMLIT RAG CHATBOT USING LANGCHAIN + OPENAI (WITH CHROMA)
 # ===============================================================
 
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain.vectorstores import Chroma
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.schema import HumanMessage
@@ -41,11 +41,11 @@ if uploaded_file is not None:
     st.info(f"📌 Document split into {len(chunks)} chunks.")
 
     # -------------------------------
-    # CREATE EMBEDDINGS AND VECTOR DB
+    # CREATE EMBEDDINGS AND VECTOR DB (CHROMA)
     # -------------------------------
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_KEY)
-    vector_db = FAISS.from_texts(chunks, embeddings)
-    st.success("✅ Vector Database Created")
+    vector_db = Chroma.from_texts(chunks, embeddings)
+    st.success("✅ Vector Database Created with Chroma")
 
     # -------------------------------
     # CREATE LLM
